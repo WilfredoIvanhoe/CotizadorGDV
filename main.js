@@ -4,9 +4,9 @@ const url = require('url')
 
 let win
 
-function createWindow(){
+function createLoginWindow(){
 	//Create Browser Window
-	win = new BrowserWindow({width : 350, height : 420})
+	win = new BrowserWindow({width : 500, height : 630})
 
 	win.loadURL(url.format({
 		pathname : path.join(__dirname, 'index.html'),
@@ -20,7 +20,7 @@ function createWindow(){
 	})
 }
 
-app.on('ready', createWindow)
+app.on('ready', createLoginWindow)
 
 app.on('window-all-closed', () =>{
 	if(process.platform != 'darwin')
