@@ -4,21 +4,398 @@
 	<meta charset="utf-8">
 	<title>Inicio</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		hr{
+			border-color: #ddd
+		}
+		.modal-body .form-horizontal{
+	    	margin-left: 15px;
+		}
+		.lote-form{
+		
+		}
+		.lotes-pagination{
+			margin: 0px;
+		}
+		#agregar-lote{
+			float: left;
+			margin-right: 5px;
+		}
+		.main-container{
+			background-color: #f8f8f8
+		}
+	</style>
 </head>
 
-<body>
+<body class="main-container">
 	<nav class="navbar navbar-default navbar-static-fluid">
 		<div class="container-fluid">
-			<ul class="nav nav-tabs">
-				<li role="navbar" class="active"><a href="#">Proyectos</a></li>
-				<li role="navbar"><a href="#">Ciudades</a></li>
-				<li role="navbar"><a href="#">Exportar</a></li>
+			<ul class="nav nav-tabs" role="tablist" id="myTabs">
+				<li role="navbar" class="active"><a href="#Proyectos" aria-controls="Proyectos" role="tab" data-toggle="tab">Proyectos</a></li>
+				<li role="navbar"><a href="#Lotes" aria-controls="Lotes" role="tab" data-toggle="tab">Lotes de Producción</a></li>
+				<li role="navbar"><a href="#Insumos" role="tab" aria-controls="Insumos" data-toggle="tab">Insumos y Otros</a></li>
+				<li role="navbar"><a href="#Resumen" role="tab" aria-controls="Resumen" data-toggle="tab">Resumen General</a></li>		
 			</ul>			
 		</div>
 	</nav>
-	
+	<!-- tab-panel BEGIN -->
+	<div class="wrapper container-fluid tab-content">
+
+		<!-- Proyectos Tab BEGIN -->
+		<div role="tabpanel" class="tab-pane fade in active" id="Proyectos" >
+			<div class="row">
+				<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+					<div id="proy-bttns">
+						<p><button type="button" class="btn btn-primary btn-lg" id="new-proy-btn" data-toggle="modal" data-target="#new-proy">Nuevo Proyecto</button></p>
+						<p><button type="button" class="btn btn-primary btn-lg" id="load-proy-btn">Cargar Proyecto</button></p>
+					</div>
+					<div class="modal fade" id="new-proy" tabindex="-1" role="dialog" aria-labelledby="new-proyLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="new-proyLabel">Nuevo Proyecto</h4>
+								</div>
+								<div class="modal-body">
+									<form class="form-horizontal">
+										<div class="form-group">
+											<label for="nombre-proy" class="col-xs-5 col-sm-5 col-md-5 col-lg-5 control-label">Nombre del Proyecto</label>
+											<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+												<input class="form-control" type="text" name="nombre-proy" id="nuevo-nombre" placeholder="Nombre">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="id-proy" class="col-xs-5 col-sm-5 col-md-5 col-lg-5 control-label">ID del Proyecto</label>
+											<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+												<input class="form-control" type="text" name="id-proy" id="nuevo-id" placeholder="17XXXX">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="fecha-ini-proy" class="col-xs-5 col-sm-5 col-md-5 col-lg-5 control-label">Fecha Inicio</label>
+											<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+												<input class="form-control" type="date" name="fecha-ini-proy" id="nuevo-fecha-ini">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="fecha-fin-proy" class="col-xs-5 col-sm-5 col-md-5 col-lg-5 control-label">Fecha Fin</label>
+											<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+												<input class="form-control" type="date" name="fecha-fin-proy" id="nuevo-fecha-fin">
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        							<button type="button" class="btn btn-primary">Aceptar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Proyectos Tab END -->
+
+		<!-- Lotes Tab BEGIN -->
+		<div role="tabpanel" class="tab-pane fade" id="Lotes" >
+			<div class="lotes-pagination">
+				<nav aria-label="Page navigation">
+				  <ul class="pagination lotes-pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				  <button type="button" class="btn btn-primary" id="agregar-lote">Agregar Lote</button>
+				</nav>
+				<hr>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h3>Información Básica</h3>
+				</div>
+				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+<!---------------------- Form-1 LOTES BEGIN ---------------------->				
+					<div class="form-horizontal">
+						<div class="form-group form-group-sm lote-form">
+							<label for="tipo-serv-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Tipo de Servicio</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="tipo-serv-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="tipo-servicio" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Ciudad/Localidad</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="ciudad-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="metodo-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Método de Recolección</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="metodo-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="tecnica-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Técnica de Recolección</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="tecnica-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="tipo-cuota-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Tipo de Cuota</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="tipo-cuota-lote"">
+							</div>
+						</div>
+					</div>
+<!---------------------- Form-1 LOTES END ------------------------>					
+				</div>
+<!---------------------- Form-2 LOTES BEGIN ---------------------->					
+				<div class="col-xs-6 col-sm-5 col-md-5 col-lg-4">
+					<div class="form-horizontal">
+						<div class="form-group form-group-sm lote-form">
+							<label for="num-entv-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Número de entrevistas, sesiones, etc.</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="num-entv-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="num-par-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Número de participantes por sesión / grupo</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="num-par-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="duracion-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Duración cuestionario (minutos)</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="duracion-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="incid-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Incidencia (grado dificultad) del Participante</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="incid-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm lote-form">
+							<label for="num-preg-lote" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 control-label">Número de preguntas abiertas</label>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<input class="form-control" type="text" id="tipo-cuota-lote"">
+							</div>
+						</div>
+					</div>
+				</div>
+<!---------------------- Form-2 LOTES END ------------------------>
+				<!-- Instructions -->
+				<div class="col-xs-6 col-sm-3 col-md-3 col-lg-4">
+					<h2>Instrucciones</h2>	
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>			
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h3>Recopilación de Datos de Mano de Obra</h3>
+				</div>
+				<!--INVESTIGADORES / AUDITORES CAMPO-->
+				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+					<h4>Investigadores/Auditores Campo</h4>
+					<div class="form-horizontal" id="inv-campo-form">
+						<div class="form-group form-group-sm">
+							<label for="product-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Productividad diaria promedio</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="product-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="duracion-dias-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Duración campo (días)</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="duracion-dias-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="no-inv-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">No. Investigadores Requeridos</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="no-inv-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-dias-inv-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total  Días Investigador efectivos</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-dias-inv-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="dias-cap-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Días Capacitación</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="dias-cap-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-dias-cap-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Días Capacitación</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-dias-cap-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="dias-ad-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Días Adicionales</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="dias-ad-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-dias-ad-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Días Adicionales</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-dias-ad-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-dias-inv-es-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Días Investigador estudio</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-dias-inv-es-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tarif-dia-inv-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label opc">Tarifa diaria investigador (carga social + comisión manejo / factura)</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tarif-dia-inv-lote" value="350$">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-cost-inv-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Costo Investigador</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-cost-inv-lote" value="0" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--INVESTIGADORES / AUDITORES CAMPO-->
+				<!--SUPERVISORES CAMPO-->
+				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+					<h4>Supervisores Campo</h4>
+					<div class="form-horizontal">
+						<div class="form-group form-group-sm">
+							<label for="inv-por-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Investigadores por Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="inv-por-sup-lote">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="num-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">No. Supervisores</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="num-sup-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-dias-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Días Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-dias-sup-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tarif-dia-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label opc">Tarifa diaria investigador (carga social + comisión manejo / factura)</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tarif-dia-sup-lote" value="450$">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-cost-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Costo Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-cost-sup-lote" value="0" readonly>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<!--SUPERVISORES CAMPO-->
+				<!--SUPERVISION TELEFONICA-->
+				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+					<h4>Supervisión Telefónica</h4>
+					<div class="form-horizontal">
+						<div class="form-group form-group-sm">
+							<label for="porc-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label obligatory">Porcentaje a supervisar</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="porc-sup-lote" value="0%">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="product-suptel-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label opc">Tarifa diaria investigador (carga social + comisión manejo / factura)</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="product-suptel-lote" value="0%">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-cost-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Costo Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-cost-sup-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-cost-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Costo Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-cost-sup-lote" value="0" readonly>
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="product-suptel-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label opc">Tarifa diaria investigador (carga social + comisión manejo / factura)</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="product-suptel-lote" value="0%">
+							</div>
+						</div>
+						<div class="form-group form-group-sm">
+							<label for="tot-cost-sup-lote" class="col-xs-7 col-sm-8 col-md-8 col-lg-8 control-label">Total Costo Supervisor</label>
+							<div class="col-xs-offset-1 col-xs-4 col-sm-offset-1 col-sm-3 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+								<input class="form-control" type="text" id="tot-cost-sup-lote" value="0" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--SUPERVISION TELEFONICA-->
+			</div>
+		</div>
+<!---------------------- Forms LOTES BEGIN ---------------------->		
+<!---------------------- Forms LOTES END ------------------------>					
+		<!-- Lotes Tab END -->
+
+		<!-- Insumos Tab BEGIN -->
+		<div role="tabpanel" class="tab-pane fade" id="Insumos" >
+			3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+		<!-- Insumos Tab END -->
+
+		<!-- Resumen Tab BEGIN -->
+		<div role="tabpanel" class="tab-pane fade" id="Resumen" >
+			4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+		<!-- Resumen Tab END -->
+	</div>
+	<!-- tab-panel END -->
 </body>
 
-<script>window.$ = window.jQuery = require('./js/jquery.min.js');</script>
+<script>window.$ = window.jQuery = require('jquery');</script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/binding.js"></script>
+
 </html>

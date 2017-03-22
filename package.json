@@ -1,5 +1,13 @@
 {
-	"name" : "Cotizador Proyectos GDV",
-	"version" : "0.0.1",
-	"main" : "main.js"
+  "name": "Cotizador_Proyectos_GDV",
+  "productName": "Cotizador_Proyectos_GDV",
+  "version": "0.0.1",
+  "author": "Jorge Padilla",
+  "description": "Cotizador de proyectos.",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "1.4.15",
+    "jquery": "^3.1.1",
+    "xlsx": "^0.9.4"
+  }
 }
